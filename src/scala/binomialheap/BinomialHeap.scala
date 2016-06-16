@@ -1,10 +1,32 @@
 package scala.binomialheap
 
+
+/*
+--MAKE-HEAP() creates and returns a new heap containing no elements.
+
+--INSERT(H, x) inserts node x, whose key field has already been filled in, into
+heap H.
+
+--MINIMUM(H) returns a pointer to the node in heap H whose key is minimum.
+
+--EXTRACT-MIN(H) deletes the node from heap H whose key is minimum, returning
+a pointer to the node.
+
+--UNION(H1, H2) creates and returns a new heap that contains all the nodes of heaps
+H1 and H2. Heaps H1 and H2 are “destroyed” by this operation.
+In addition, the data structures in these chapters also support the following two
+operations.
+
+--DECREASE-KEY(H, x, k) assigns to node x within heap H the new key value k,
+which is assumed to be no greater than its current key value.1
+
+--DELETE(H, x) deletes node x from heap H
+ */
 class BinomialHeap {
   var root: BNode = null
 
   def isEmpty: Boolean = {
-    return root == null
+    root == null
   }
 
   def insert(x: BNode) {
@@ -97,14 +119,18 @@ class BinomialHeap {
       z = y.parent
     }
   }
+
+  def minumun(): BNode = {
+    root
+  }
 }
 
 object BinomialHeap {
   private def mergeRootList(h1: BinomialHeap, h2: BinomialHeap): BNode = {
     if (h1.root == null)
-      return h2.root
+      h2.root
     else if (h2.root == null)
-      return h1.root
+      h1.root
     else {
       var head: BNode = null
       var tail: BNode = null
@@ -133,7 +159,7 @@ object BinomialHeap {
       }
       if (h1Next != null) tail.sibling = h1Next
       else tail.sibling = h2Next
-      return head
+      head
     }
   }
 
